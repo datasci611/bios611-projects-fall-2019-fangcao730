@@ -1,0 +1,100 @@
+setwd("/Users/a11/Desktop/BIOS 611")
+rm(list=ls())
+library(readr)
+library(tidyverse)
+library(dbplyr)
+library(ggplot2)
+library(tidyr)
+raw <- read_tsv("UMD_Services.tsv")
+#####This part is counting services provided year each based on number of distinct clients served 
+raw$Date <- as.Date(raw$Date, "%m/%d/%Y")
+#x counting the hygiene product service overtime: the number of people who came in for this service every year (regardless of how many times)
+ x <-raw %>%
+  separate(Date, sep="-", into = c("year", "month", "day"))%>% filter(year<=2019) %>%group_by(`Client File Number`)%>% 
+   drop_na(`Hygiene Kits`) %>% filter(`Hygiene Kits`>0)%>% select(`Hygiene Kits`, `Client File Number`, year)%>%
+   group_by(year)%>% filter(year>=1997)%>%summarise(hygiene = n_distinct(`Client File Number`))
+#y is counting bus ticket service overtime 
+  y <-raw %>%
+   separate(Date, sep="-", into = c("year", "month", "day"))%>% filter(year<=2019) %>%group_by(`Client File Number`)%>% 
+   drop_na(`Bus Tickets (Number of)`) %>% filter(`Bus Tickets (Number of)`>0)%>% select(`Bus Tickets (Number of)`, `Client File Number`, year)%>%
+   group_by(year)%>% filter(year>=1997)%>%summarise(bustix = n_distinct(`Client File Number`))
+#f is counting the food services overtime 
+  f <-raw %>%
+    separate(Date, sep="-", into = c("year", "month", "day"))%>% filter(year<=2019) %>%group_by(`Client File Number`)%>% 
+    drop_na(`Food Pounds`) %>% filter(`Food Pounds`>0)%>% select(`Food Pounds`, `Client File Number`, year)%>%
+    group_by(year)%>% filter(year>=1997)%>%summarise(foodpounds = n_distinct(`Client File Number`))
+#m is counting the financial service overtime
+  m <-raw %>%
+    separate(Date, sep="-", into = c("year", "month", "day"))%>% filter(year<=2019) %>%group_by(`Client File Number`)%>% 
+    drop_na(`Financial Support`) %>% filter(`Financial Support`>0)%>% select(`Financial Support`, `Client File Number`, year)%>%
+    group_by(year)%>% filter(year>=1997)%>%summarise(financialassistance = n_distinct(`Client File Number`))
+#c is counting the clothing service 
+  c <-raw %>%
+    separate(Date, sep="-", into = c("year", "month", "day"))%>% filter(year<=2019) %>%group_by(`Client File Number`)%>% 
+    drop_na(`Clothing Items`) %>% filter(`Clothing Items`>0)%>% select(`Clothing Items`, `Client File Number`, year)%>%
+    group_by(year)%>% filter(year>=1997)%>%summarise(clothing = n_distinct(`Client File Number`))
+#s is counting the school kit service 
+  s <-raw %>%
+    separate(Date, sep="-", into = c("year", "month", "day"))%>% filter(year<=2019) %>%group_by(`Client File Number`)%>% 
+    drop_na(`School Kits`) %>% filter(`School Kits`>0)%>% select(`School Kits`, `Client File Number`, year)%>%
+    group_by(year)%>% filter(year>=1997)%>%summarise(school = n_distinct(`Client File Number`))
+  #Number of unique client values for each year 
+  unique<-raw %>%
+    separate(Date, sep="-", into = c("year", "month", "day"))%>% filter(year<=2019 & year >=1997) %>%group_by(year)%>%
+    summarise(all = n_distinct(`Client File Number`))
+ #Number of distinct clients for each month regardless of year
+   um<-raw %>%
+    separate(Date, sep="-", into = c("year", "month", "day"))%>% filter(year<=2019 & year >=1997) %>%group_by(month)%>%
+    summarise(allmonth = n_distinct(`Client File Number`))
+#z is counting diaper service overtime and then merged with all the services  
+ z<-raw %>%
+separate(Date, sep="-", into = c("year", "month", "day"))%>% filter(year<=2019) %>%
+drop_na(`Diapers`)%>% filter(`Diapers` > 0) %>% select(`Diapers`, `Client File Number`, year)%>%
+group_by(year)%>% filter(year>=1997)%>%summarise(diapers = n_distinct(`Client File Number`))%>% full_join(unique, by='year') %>%
+full_join(y, by='year')%>% full_join(x, by='year')%>% full_join(f, by='year')%>% full_join(m, by='year')%>%full_join(c, by='year')%>%full_join(s, by='year')
+#Gather the services and put them in one column and other for quantity of service (ignoring the quantitiy for this graph)
+total <- z%>% gather(bustix, diapers, hygiene, financialassistance, foodpounds, school, key='Service', value='Quantity') %>% select("Service", "Quantity", "year")
+#Graphs 
+ggplot(total, aes(fill=Service, y=Quantity, x=year)) + 
+  geom_bar(position="stack", stat="identity")+ xlab("Year") + ylab("Number of People/Families")
+#See how Number of clients served vary by month and year 
+monthyear<-raw %>%
+  separate(Date, sep="-", into = c("year", "month", "day"))%>% filter(year<=2019 & year >=1997) %>%group_by(year, month)%>%
+  summarise(count = n_distinct(`Client File Number`))
+ggplot(monthyear, aes(month, year, fill=count)) + geom_tile()+ theme_classic()
+#plotting total number of distinct clients each year and month
+ggplot(unique, aes(x=year, y=all, group=1)) + geom_smooth(se=FALSE)+geom_point()+ylab("Number of Distinct Clients/Families")
+
+ggplot(um, aes(x=month, y=allmonth, group=1)) + geom_line(color="Royalblue")+geom_point()+ylab("Number of Distinct Clients/Families")
+
+## average service provided each month based on amount of each product  over the years 
+#(not doing them altogether because of all the NAs everywhere)
+food <- raw%>% separate(Date, sep="-", into = c("year", "month", "day"))%>% filter(year<=2019 & year >=1997)%>% 
+  drop_na( `Food Pounds`) %>% filter(`Food Pounds`>0)%>% select(`Food Pounds`, year, month)%>%
+  group_by(month)%>%summarise(food=mean(`Food Pounds`))
+finance <- raw%>% separate(Date, sep="-", into = c("year", "month", "day"))%>% filter(year<=2019 & year >=1997)%>% 
+  drop_na(`Financial Support`) %>% filter(`Financial Support`>0)%>% select(`Financial Support`, year, month)%>%
+  group_by(month)%>%summarise(finan=mean(`Financial Support`))
+cloth <- raw%>% separate(Date, sep="-", into = c("year", "month", "day"))%>% filter(year<=2019 & year >=1997)%>% 
+  drop_na(`Clothing Items`) %>% filter(`Clothing Items`>0)%>% select(`Clothing Items`, year, month)%>%
+  group_by(month)%>%summarise(clothing=mean(`Clothing Items`))
+allservices <- full_join(food, finance, by="month")%>% full_join(cloth, by="month")%>%
+  gather(food, finan, clothing, key='Service', value='Quantity')
+ggplot(allservices, aes(x=month, y=Quantity, group=Service, colour=Service)) + geom_line()+ggtitle("Amount of Service each month averaged by year")
+
+ 
+
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
