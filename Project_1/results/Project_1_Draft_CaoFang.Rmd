@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-```{r UMD}
+```{r UMD, echo=FALSE}
 setwd("/Users/a11/Desktop/BIOS 611")
 rm(list=ls())
 library(readr)
@@ -81,7 +81,7 @@ ggplot(um, aes(x=month, y=allmonth, group=1)) + geom_line(color="Royalblue")+geo
 
 ```
 #These plots look at the number of clients served by year and month regardless of the amount of service they received. Looks like the number of clients served increased overall from 1997 to 2019, with number of clients pretty stable throughout the year. Some services stopped after 2005 and now people come in more for food than for any other types of services. 
-```{r UMD Amount of Service }
+```{r UMD Amount of Service, echo=FALSE }
 ## average service provided each month based on amount of each product  over the years 
 #(not doing them altogether because of all the NAs everywhere)
 food <- raw%>% separate(Date, sep="-", into = c("year", "month", "day"))%>% filter(year<=2019 & year >=1997)%>% 
