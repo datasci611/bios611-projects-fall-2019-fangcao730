@@ -33,7 +33,7 @@ The dataset describes when each clients come in for service as well as the types
 monthyear<-raw %>%
   separate(Date, sep="-", into = c("year", "month", "day"))%>% filter(year<=2019 & year >=1997) %>%group_by(year, month)%>%
   summarise(count = n_distinct(`Client File Number`))
-ggplot(monthyear, aes(month, year, fill=count)) + geom_tile()+ theme_classic()
+ggplot(monthyear, aes(month, year, fill=count)) + geom_tile()+ theme_classic()+ ggtitle("Number of distinct clients served overtime by month and year")
 
 ```
 
@@ -91,7 +91,7 @@ total <- z%>% gather(clothing, bustix, diapers, hygiene, financialassistance, fo
 
 ```{r warning=FALSE, echo=FALSE}
 ggplot(total, aes(fill=Service, y=Quantity, x=year)) + 
-  geom_bar(position="stack", stat="identity")+ xlab("Year") + ylab("Number of People/Families")+ggtitle("Number of distinct clients by year and month")+scale_fill_brewer(palette = "Paired")
+  geom_bar(position="stack", stat="identity")+ xlab("Year") + ylab("Number of People/Families")+ggtitle("Number of distinct clients by types of service over the years ")+scale_fill_brewer(palette = "Paired")
 ```
 
 
