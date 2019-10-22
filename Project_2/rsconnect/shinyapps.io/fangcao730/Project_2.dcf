@@ -1,0 +1,13 @@
+name: Project_2
+title: Project_2
+username:
+account: fangcao730
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1360379
+bundleId: 2522990
+url: https://fangcao730.shinyapps.io/Project_2/
+when: 1571704926.81258
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: data/.DS_Store|data/.gitkeep.R|data/UMD_Services.tsv
