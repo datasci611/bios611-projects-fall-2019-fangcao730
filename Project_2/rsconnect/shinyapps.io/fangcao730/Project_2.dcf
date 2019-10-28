@@ -5,9 +5,9 @@ account: fangcao730
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1360379
-bundleId: 2522990
+bundleId: 2542270
 url: https://fangcao730.shinyapps.io/Project_2/
-when: 1571704926.81258
+when: 1572231458.43558
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: data/.DS_Store|data/.gitkeep.R|data/UMD_Services.tsv
+ignoredFiles: .RData|Data/.DS_Store
