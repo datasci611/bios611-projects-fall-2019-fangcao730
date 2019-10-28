@@ -1,8 +1,11 @@
 ### Project 2 
 
 ## Data source: 
-from Urban Ministries of Durham
-This visualization will help visualize:
+from Urban Ministries of Durham (url at: http://www.umdurham.org/ )
+
+## Goals
+UMD clothing and food pantries section shows the average number of households helped in the
+past year and the amount of services given out. Therefore to make it easier to visualize these numbers over the past decades. This visualization will help visualize:
 * the temporal trend of number of clients served 
 * temporal trend of amount of services given out
 * Number of families (persons>=2) served each year
