@@ -1,0 +1,12 @@
+FROM rocker/tidyverse
+
+WORKDIR /home/fangcao
+
+RUN Rscript -e "install.packages('ggplot2')"
+
+RUN Rscript -e "install.packages('data.table')"
+
+RUN Rscript -e "install.packages('dplyr')"
+
+
+

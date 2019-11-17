@@ -1,0 +1,10 @@
+FROM python
+
+RUN mkdir /home/fangcao
+
+RUN pip install pandas numpy 
+
+
+
+
+
