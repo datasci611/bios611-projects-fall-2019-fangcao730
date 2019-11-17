@@ -5,5 +5,5 @@ UDES_clean.csv:my_images
 r_images:Dockerfile.Rscript
         docker build -t r_images -f Dockerfile.Rscript . && touch $@
 myplot.png:UDES_clean.csv r_images
-        docker run -it --rm -v $(pwd):$(pwd) -w $(pwd) my_images Rscript R_plot.R
+        docker run -it --rm -v $(pwd):$(pwd) -w $(pwd) r_images Rscript R_plot.R
                                                                                          
