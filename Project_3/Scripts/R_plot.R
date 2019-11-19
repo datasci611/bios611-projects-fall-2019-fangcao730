@@ -1,9 +1,14 @@
-setwd("/Users/a11/Documents/GitHub/bios611-projects-fall-2019-fangcao730/Project_3/Data")
+#this script very unfinished. sorry about this. But do comment on the makefiles and other scripts
 library(data.table)
 library(tidyverse)
 library(ggplot2)
 library(dplyr)
-UDES_clean <- fread("UDES_clean.csv", header = TRUE)
-#recode
+UDES <- fread("UDES_m.csv", header=TRUE)
+interval <- fread("interval.csv", header = TRUE)
+#recode  some variables 
 UDES_clean$Veteran <- ifelse(UDES_clean$`Client Veteran Status`=="Yes (HUD)", 1, 0)
-plot <- ggplot(UDES_clean, aes(Veteran))+geom_bar()
+UDES_clean$Insurance <- ifelse(UDES_clean$`Covered by Health Insurance(4376)`=="Yes (HUD)", 1, 0)
+#veteran status
+ggplot(UDES_clean, aes(Veteran))+geom_bar()
+ggsave(filename = "vplot.png")
+ggplot(interval, aes(interval))+geom_bar()
