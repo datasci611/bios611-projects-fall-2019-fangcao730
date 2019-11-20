@@ -1,0 +1,40 @@
+-Is the project organized modularly, with Make as the workflow manager?
+The project is well organized in R and Python but no docker or makefile
+
+Does the project use both Python (Pandas specifically) and R (Tidyverse specifically) scripts?
+-Yes both were used and well organized. One thing in the python script. I also tried the pd.merge by client ID and got many duplicates
+-Try merge by using EE UID and Client ID as keys. This works better than any ID alone. (although this is more of the dataset's problem)
+-If i'm correct both UDES and entry exit has 5299 records. The resulting merge using EE UID is also 5299 records, which means the dataset you are using 
+out of python wrangling might be missing some people as you removed the duplicates. I have no clue how anything is coded but give it a try
+
+Is Docker used to define execution environments appropriately?
+-No Dockerfile or makefiles seen in the repo
+-Caution when you use absolute path to read in csv in your R markdown or to_csv in the python script. 
+In Docker it won't recognize your local path
+
+Are the plots appropriate for the data types, the hypotheses being tested, and the points being communicated?
+-Great versatile use of ggplot2. i like the age pyramids, which is very clear and concise. 
+-I know this is a draft and unfinished. Maybe consider adding a legend ?
+-The y-axis seems to be off. You can use scale_y_continuous() to center 0 in the middle and positive values on both sides (I'm sure there are other great ways to do this too)..
+-Pie charts are efficient. i like the color scheme too. 
+
+How can the project be organized or documented more clearly?
+-the organization is great. Maybe add some informative comment lines in your script along with the separators.
+
+Is the purpose of the project communicated clearly?
+-Yes and considering the unfinished parts, the R markdown file is very helpful.
+
+Does the purpose of the project make sense from the client’s point of view? How could the project better serve the client?
+-Not yet but seems to be moving in the right direction and the questions are very meaningful as well. 
+
+Is the source of the data made clear? (Remember that this project can be part of your public portfolios, so people not familiar with UMD may see it).
+-Yes, very clearly stated and Read me very clear 
+
+Is the interpretation of figures clearly explained?
+-Not added yet but can be easily explained just by looking at the plots. They are delivered effectively. 
+
+Is the purpose and interpretation of analysis steps clearly communicated?
+-Most analyses remain pretty preliminary and descriptive therefore not much explanation is needed. 
+
+Are overall take-home messages clearly communicated?
+-yes
