@@ -1,0 +1,42 @@
+Is the project organized modularly, with Make as the workflow manager?
+-Yes but no makefile is listed so I can't comment on the Makefile.  
+
+Does the project use both Python (Pandas specifically) and R (Tidyverse specifically) scripts?
+-Yes, both are used and i got the gist of what you're trying to do
+-I looked at the python error about memory overload. I think the problem can be solved by not using client ID as merge key. 
+I think somehow this Client ID has some duplicates problems. I looked at the csv file you had, there are indeed some problems of duplicates. 
+Just by looking at first few lines, client 188933 has around 8 duplicated records. 
+-Try using EE UID and see if it matches better with less duplicates. 
+-Also each person has multiple disabilities and each one listed as one row. Might help to reduce the number of rows by just tallying for each person the number of disabilities they had. (just a suggestion)
+-I know this is draft and you might change later in your project but for the duration variable, it seems a lot of people are at the zero year 
+category because people stay for less than one year often. Maybe try the entry-exit csv and calculate duration by months or days ? 
+
+Is Docker used to define execution environments appropriately?
+-No makefile so I can't tell if Docker is used but I'm sure in the final project it'll be used correctly
+
+Are the plots appropriate for the data types, the hypotheses being tested, and the points being communicated?
+-Yes and thanks for putting what you plan to do on the comment line. 
+
+How can the project be organized or documented more clearly?
+-Yes it is well organized so far. 
+It would help in the python script to comment on what you are doing in some lines like renaming variables or columns. 
+
+
+Is the purpose of the project communicated clearly?
+-Yes, it was listed in the project readme and very clear and concise. 
+
+Does the purpose of the project make sense from the client’s point of view? How could the project better serve the client?
+-Yes and I liked in the readme how you mentioned what UMD hoped to learn. This is an important question. 
+-With that in mind, maybe look at the entry_exit file with the variable "reason for leaving" as well? (just a suggestion) to see if people are leaving due to self-sufficiency
+
+Is the source of the data made clear? (Remember that this project can be part of your public portfolios, so people not familiar with UMD may see it).
+-yes
+
+Is the interpretation of figures clearly explained?
+-Not in the R script but i can understand what each plot is doing from the comment lines
+
+Is the purpose and interpretation of analysis steps clearly communicated?
+-Yes although I do not yet know whay analyses will be used. Might help to list them out in the read me a little more clearly
+
+Are overall take-home messages clearly communicated?
+-Not in the scripts but I am sure in the final project this will be done.
