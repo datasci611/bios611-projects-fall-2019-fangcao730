@@ -1,0 +1,44 @@
+Is the project organized modularly, with Make as the workflow manager?
+-I didn't find a makefile in any of the files yet. 
+-Also noticed in your R script you used the raw data not the one you cleaned in python, 
+hopefully for the final project you can coordinate between the two. 
+
+Does the project use both Python (Pandas specifically) and R (Tidyverse specifically) scripts?
+-Yes both were used
+-I noticed in python cleaning script you cast the dataframe with dropped columns to a new dataframe. 
+You can do so by just casting it to its original name and overwrite it. It saves some space and you don't have to type out the whole long name age_client_keep
+-I also had this problem of duplicates after merge by Client ID and dropped duplicates. 
+I think this works fine but if in later merges you encounter this problem again, try using EE UID. This is unique for each person while Client iD or even Client unique ID are not. 
+
+Is Docker used to define execution environments appropriately?
+-No makefile used yet
+-Caution when you use absolute path in r script. 
+Remember to change it back to a relative path so that docker can read files in correctly
+
+Are the plots appropriate for the data types, the hypotheses being tested, and the points being communicated?
+-Yes.
+-i noticed you are trying to plot the difference in ages between entry and exit and plan to use the duration variable. Thanks for pointing it out in the comment line. 
+-this line: age_depart <- age_depart[-(4200:5408), ,drop = FALSE] confused me a little bit.
+But if you are just trying to calculate age difference
+maybe try just using mutate from tidyverse rather than using a matrix? 
+(this is just from personal experience and pure suggestion but if you can avoid using matrix to achieve something do avoid. 
+For larger datasets it'll crash R studio sometimes and not east to handle.)
+
+How can the project be organized or documented more clearly?
+-It is well documented and comment lines show exactly what it's doing. I also appreciate the fact you put the interpretations and what you plan to do.
+
+Is the purpose of the project communicated clearly?
+-yes roughly in the readme but maybe it might help a little more to specify which analyses will be done 
+
+Does the purpose of the project make sense from the client’s point of view? How could the project better serve the client?
+-yes since understanding the demographic composition is always important for any governmental services. 
+-Maybe also consider whether UMD has helped their clients overtime in terms of income and health insurance ? (just personal suggestion)
+
+Is the source of the data made clear? (Remember that this project can be part of your public portfolios, so people not familiar with UMD may see it).
+-yes
+
+Is the interpretation of figures clearly explained?
+-Yes and I can understanding easily from the comment lines. 
+
+Are overall take-home messages clearly communicated?
+-Not yet but I'm sure you'll achieve this! 
