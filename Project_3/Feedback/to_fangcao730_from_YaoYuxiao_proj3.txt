@@ -1,0 +1,62 @@
+
+Hi Fang Cao,
+
+
+Overall, your project3 draft has a good format and logic!
+
+
+
+-------------Review of README-------------
+
+
+Exploratory goals are clear and interesting, they make sense from the client’s point of view. 
+
+However, it would be helpful to have more details to describe datasets used in the project and background information.
+
+Adding methods might be a good idea to provide an outline of the project.
+
+
+-------------Review of Makefile and Dockerfile----------------
+
+Docker is used to define execution environments appropriately.
+
+The project is organized modularly, with Make as the workflow manager.
+
+
+-------------Review of Python and R scripts----------------
+
+
+The project uses both Python (Pandas specifically) and R (Tidyverse specifically) scripts well.
+
+Your codes are neat and readable!
+
+
+-------------Review of html report---------------------
+
+
+Various kinds of plots do a good job of analyzing and summarizing.
+
+
+More details about background and datasets would be helpful.
+
+
+However, it would be better if underlying meaning of the hypotheses can be discussed.
+
+
+Adding some explaination could be a good idea to help clients understand underlying meaning of the plot.
+
+
+Also, you may want to add more transistion paragraphs to show connections between questions.
+
+
+
+-------------Review of codes--------------------
+
+
+
+Your codes are neat and readable!
+
+
+
+
+Good luck in final project!

@@ -1,0 +1,37 @@
+1. Is the project organized modularly, with Make as the workflow manager?
+- Yes, the makefile and dockerfile are included. 
+- Separating into data, results, and scripts folders is helpful for navigation too! For the final draft, it might be helpful for the audience if you describe the contents of each folder in the README.
+
+2. Does the project use both Python (Pandas specifically) and R (Tidyverse specifically) scripts?
+- Yes, and the scripts are commented clearly. Including a snapshot of the dataframe in the pandas script is helpful for review.
+
+3. Is Docker used to define execution environments appropriately?
+- Yes, docker specifies packages to be used
+
+4. Are the plots appropriate for the data types, the hypotheses being tested, and the points being communicated?
+- There aren't any plots yet, but it looks like they will include veteran status based on the r code. 
+
+5. How can the project be organized or documented more clearly?
+- The scripts look clearly commented so far. However, the README is pretty sparse. 
+- Instead of expecting the audience to always run the output, include a report made with markdown too. People using this information at UMD might not be great at using docker/make (even though a goal of this project is to use those).
+
+6. Is the purpose of the project communicated clearly?
+- There isn't a report yet to comment on. The README mentions project goals, but could go into more detail. 
+- It would be helpful to include some background about UMD, and why UMD should be interested in demographics and veteran status.
+- By 'utilization of homeless shelters', what do you mean and which variables will you use? I think this can be interesting if you're more specific for the final draft!
+
+7. Does the purpose of the project make sense from the client’s point of view? How could the project better serve the client?
+- Include some more  context about UMD and why you chose to look particularly at veterans. Are veterans more likely to be homeless, are they more common? etc. 
+
+8. Is the source of the data made clear? (Remember that this project can be part of your public portfolios, so people not familiar with UMD may see it).
+- It's included in the data folder which is good, but explain which datasets you used in the README. 
+- Consider adding some metadata like number of observations and specific variables you're interested in. This will help people navigate your project with the analysis goals in  mind. 
+
+9. Is the interpretation of figures clearly explained?
+- no output figures or accompanying interpretation yet.
+
+10. Is the purpose and interpretation of analysis steps clearly communicated?
+- the code is commented well so far. Be sure to discuss some analysis steps (source data, cleaning, choosing variables) in the readme or project introduction.
+
+11. Are overall take-home messages clearly communicated?
+- None yet, since there is no report yet. Since you have a results folder, that would be a good spot to keep the report! 
