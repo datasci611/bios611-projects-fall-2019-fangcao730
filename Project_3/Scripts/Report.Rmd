@@ -90,10 +90,6 @@ This plot shows the relationship between client vulnerability index and differen
 As seen from the graphs above, none of the factors show outstanding patterns despite being victims of domestic violence. 
 
 ## Did UMD successfully rehouse those people based on the vulnerability index ?
-```{r echo=FALSE, warning=FALSE, message=FALSE, fig.height=5, fig.width=12}
-ggplot(no_blank, aes(vi_category, Destination)) + geom_bin2d()+ theme_minimal()+
-  scale_fill_distiller(palette = "Accent")+xlab("intervention intended")+ylab("Actual Destination")
-```
 
 Looks like from the graph that there is no clear pattern of rehousing based on their baseline assessment. For most of clients the destination are usually still friends or family while rehousing for homeless people or trasnistional housing are not top destinations. There are almost no difference across the three categories of vulnerabilities. 
 
