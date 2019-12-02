@@ -1,17 +1,17 @@
 UDES.csv:pull-pandas
-        docker run -it \
+         docker run -it \
                 --rm -v $(shell pwd):/workdir \
                 -w /workdir \
                 amancevice/pandas:0.25.2-slim \
                         python3 Cleaning.py UDES.csv
 insurance.csv:pull-pandas
-        docker run -it \
+         docker run -it \
                 --rm -v $(shell pwd):/workdir \
                 -w /workdir \
                 amancevice/pandas:0.25.2-slim \
                         python3 Cleaning.py insurance.csv
 wellness.csv:pull-pandas
-        docker run -it \
+         docker run -it \
                 --rm -v $(shell pwd):/workdir \
                 -w /workdir \
                 amancevice/pandas:0.25.2-slim \
