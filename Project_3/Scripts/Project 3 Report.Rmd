@@ -23,9 +23,9 @@ library(grid)
 library(gridExtra)
 library(ggplot2)
 library(dplyr)
-UDES <- fread("./Scripts/total.csv", header=TRUE)
-wellness <- fread("./Scripts/vi_category.csv", header=TRUE)
-insurance <- fread("./Scripts/insurance.csv", header=TRUE)
+UDES <- fread("total.csv", header=TRUE)
+wellness <- fread("vi_category.csv", header=TRUE)
+insurance <- fread("insurance.csv", header=TRUE)
 #recode  some variables 
 wellness$interval_years <- wellness$Interval_months/12
 #baseline demographic characteristics
