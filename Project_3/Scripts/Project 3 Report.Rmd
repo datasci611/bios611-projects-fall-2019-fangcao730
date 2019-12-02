@@ -1,0 +1,101 @@
+---
+title: "Project 3"
+author: "Cao Fang"
+date: "December 1, 2019"
+output: html_document
+---
+
+## Data sources and Background
+Data provided by the Urban Ministries of Durham on their services of homeless shelter. The dataset used for this report are health insurance at entry, UDES survey data, baseline client information and the vulnerability assessment at entry. 
+
+## Goals
+The goal for this visualization is to answer the questions: 
+- What are the demographic composition of people in homeless shelter ? 
+-What causes people to stay longer in the shelters? 
+- what causes people to score higher in the vulnerability index? 
+-Are people properly rehoused based on their assessment
+
+## Baseline Demographic Characteristics
+```{r echo=FALSE,fig.height=5, fig.width=6, warning=FALSE, message=FALSE}
+library(data.table)
+library(tidyverse)
+library(grid)
+library(gridExtra)
+library(ggplot2)
+library(dplyr)
+UDES <- fread("./Scripts/total.csv", header=TRUE)
+wellness <- fread("./Scripts/vi_category.csv", header=TRUE)
+insurance <- fread("./Scripts/insurance.csv", header=TRUE)
+#recode  some variables 
+wellness$interval_years <- wellness$Interval_months/12
+#baseline demographic characteristics
+ggplot(UDES, aes(`Client Age at Entry`)) + 
+  geom_bar(aes(fill=Race), position="stack")+ xlab("Age at entry") + ylab("Number of People")+
+  scale_fill_brewer(palette = "Dark2")
+```
+
+As seen in the figure, the age of clients are normally distributed with median around 50. Most of the clients are African Americans (across all ages) while the proportion of white clients are larger at tail ends (youngest and oldest). There are almost no asians and very few Pacific islanders or American Indians. 
+
+#Baseline Health Insurance Utilization
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, fig.height=5, fig.width=6}
+df1 <- wellness%>% select('TotalVi', `EE UID`, 'vi_category')%>%
+  merge(insurance, by="EE UID")
+ggplot(df1, aes(Type_insurance)) +
+  geom_bar(aes(fill=vi_category))+scale_fill_brewer(palette = "Spectral")+
+  ggtitle("Health insurance types distribution")+
+  xlab("Type of insurance")+ylab("Count")
+```
+
+As seen from above, most people are on Government insurance programs such as COBRA, CHIP, MEDICARE, MEDICAID and VA Health insurance. 
+
+## What determines how long clients stay at those shelters ? 
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, fig.height=5, fig.width=6}
+ggplot(UDES, aes(Disability, `Client Age at Entry`, fill=Interval_months))+
+  geom_tile()+scale_fill_distiller(palette = "Accent")+ ggtitle("Age and Number of disabilities related to length of stay")+
+  ylab("Client Age at Entry")
+```
+
+This plot shows people's length of stay by their age and number of disabilities. As seen from across the figure horizontally: in general, people more than 5 disabilities (such as vision impairment, drug or alcohol abuse or AIDS) tend to stay longer than people with less than 5 disabilities. Across age there isn't really a pattern for length of stay as people of all ages have stayed for over 2 years. 
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, fig.height=5, fig.width=6}
+no_blank <- wellness%>% 
+  mutate_all(~ifelse(. %in% c("N/A", "null", " "), NA, .)) %>% 
+  na.omit()
+ggplot(no_blank, aes(x=factor(TotalVi), Interval))+
+  geom_boxplot(color="RoyalBlue")+xlab("Total Vi Score")+ylab("Length of Stay in Days")+ggtitle("Length of stay and degree of vulnerability")
+```
+
+The assessment called Service Prioritization Assessment Tool was used to assess the degree of risk and vulnerabilities for each client. The higher the vi score the more vulnerable the client is. As seen from the graph, there isn't much difference across difference vi scores. 
+
+```{r echo=FALSE, warning=FALSE, message=FALSE, fig.height=5, fig.width=12}
+average <- UDES%>%group_by(Destination)%>%summarise(ave=mean(Interval_months))
+ggplot(average, aes(Destination, ave))+geom_bar(stat = "identity", fill="cornflowerblue")+coord_flip()+
+  ylab("Average Length of Stay in Months")
+```
+
+This plot shows the average number of months people stay in the shelters by their destination. This plot was intended to see whether the types of destination will influence how long people choose to stay in transitional housings. As seen from the graph, the 
+
+## What determines the Client vulnerabilities?
+```{r echo=FALSE, warning=FALSE, message=FALSE, fig.height=5, fig.width=10}
+p1 <- ggplot(no_blank, aes(`Domestic violence victim/survivor(341)`, TotalVi))+geom_boxplot()+xlab("Domestic Violence Survivor")
+p2 <- ggplot(no_blank, aes(`Client Veteran Status`, TotalVi))+geom_boxplot()+xlab("Veteran Status")
+p3 <- ggplot(no_blank, aes(covered_entry, TotalVi))+geom_boxplot()+xlab("Health Insurance Coverage")
+p4 <- ggplot(no_blank, aes(Race, TotalVi))+geom_boxplot()
+grid.arrange(p1, p2, p3, p4, nrow = 2, ncol=2)
+```
+
+This plot shows the relationship between client vulnerability index and different factors.
+As seen from the graphs above, none of the factors show outstanding patterns despite being victims of domestic violence. 
+
+## Did UMD successfully rehouse those people based on the vulnerability index ?
+```{r echo=FALSE, warning=FALSE, message=FALSE, fig.height=5, fig.width=12}
+ggplot(no_blank, aes(vi_category, Destination)) + geom_bin2d()+ theme_minimal()+
+  scale_fill_distiller(palette = "Accent")+xlab("intervention intended")+ylab("Actual Destination")
+```
+
+Looks like from the graph that there is no clear pattern of rehousing based on their baseline assessment. For most of clients the destination are usually still friends or family while rehousing for homeless people or trasnistional housing are not top destinations. There are almost no difference across the three categories of vulnerabilities. 
+
+##Conclusion
+Overall, UMD might need to consider more rigorous plan to help people with high risks and high number of disabilities re-house after they leave homeless shelter.
