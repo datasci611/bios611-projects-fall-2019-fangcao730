@@ -1,5 +1,14 @@
-This project will explore 
-1. the demographic composition and veteran status of the homeless population
-2. how the factors covary with utilization of homeless shelters 
+# Background and data sources
+From the shelters by Urban Ministries of Durham 
+# Goal of the Project 
+1. Explore the relationship between vulnerability index at entry and baseline characteristics like disabilities, veteran status, health insurance coverage etc. 
+2. Explore the relationship between different factors and the length of clients' stay in the shelters like number of disabilities, age and their vulnerability index
+3. Explore whether UMD carries out the guideline on their vulnerability assessment using the client destination after leaving the shelters 
 
-To obtain the output download the Rscript and .py in scripts folder as well as the Makefile and Dockerfiles (.python and .Rscript)
+
+To obtain the output 
+Git clone the repository and navigate to bios611-projects-fall-2019-fangcao730
+/Project_3/Scripts 
+Then run the command: make Report.html -f Makefile 
+It will be located in the same scripts folder
+
