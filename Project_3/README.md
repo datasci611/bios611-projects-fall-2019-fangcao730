@@ -8,8 +8,9 @@ From the shelters by Urban Ministries of Durham regarding the details of their c
 
 
 # To obtain the output
-Clone the whole project repository. and cd ./bios611-projects-fall-2019-fangcao730/Project_3/Scripts 
+Clone the whole project repository: https://github.com/datasci611/bios611-projects-fall-2019-fangcao730.git
+Then cd ./bios611-projects-fall-2019-fangcao730/Project_3/Scripts 
 (Make sure there's no space between the directories)
-Then: make Report.html -f Makefile or just make Report.html
-Then just ls and you'll see the three csv files and the Report.html generated
+Then run: make Report.html
+Then: ls and you'll see the three csv files and the Report.html generated
 
