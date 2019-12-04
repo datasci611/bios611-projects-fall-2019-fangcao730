@@ -11,5 +11,5 @@ From the shelters by Urban Ministries of Durham regarding the details of their c
 Clone the whole project repository. and cd ./bios611-projects-fall-2019-fangcao730/Project_3/Scripts 
 (Make sure there's no space between the directories)
 Then: make Report.html -f Makefile or just make Report.html
-It will be located in the same Scripts folder called Report.html 
+Then just ls and you'll see the three csv files and the Report.html generated
 
